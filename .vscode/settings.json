@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "string": "cpp",
+        "cstddef": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp"
+    }
+}
