@@ -8,7 +8,7 @@ namespace solver{
 
 class RealVariable{
 public:
-    int _a;
+    double _a;
     double _b,_c;
 
 RealVariable(){
@@ -28,20 +28,20 @@ friend RealVariable &operator/ ( double n ,RealVariable &x);
 ///// '+' //////
 friend RealVariable &operator+ (RealVariable &x_1 , RealVariable &x_2);
 friend RealVariable &operator+ (RealVariable &x , double n);
-friend RealVariable &operator+ ( double n ,RealVariable &x);
+friend RealVariable &operator+ ( double n ,RealVariable& x);
 
 ///// '-' //////
-friend RealVariable &operator- (RealVariable &x_1 , RealVariable &x_2);
-friend RealVariable &operator- (RealVariable &x , double n);
-friend RealVariable &operator- ( double n ,RealVariable &x);
+friend RealVariable &operator- (RealVariable& x_1 , RealVariable &x_2);
+friend RealVariable &operator- (RealVariable& x , double n);
+friend RealVariable &operator- ( double n ,RealVariable& x);
 
 ///// '^' //////
 friend RealVariable &operator^ (RealVariable &x , int n);
 
 ///// '==' //////
-friend RealVariable &operator== (RealVariable &x_1 , RealVariable &x_2);
-friend RealVariable &operator== (RealVariable &x , double n);
-friend RealVariable &operator== ( double n ,RealVariable &x);
+friend RealVariable &operator== (RealVariable& x_1 , RealVariable &x_2);
+friend RealVariable &operator== (RealVariable& x , double n);
+friend RealVariable &operator== ( double n ,RealVariable& x);
 };
 
 class ComplexVariable{
