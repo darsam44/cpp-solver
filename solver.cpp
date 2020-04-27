@@ -7,14 +7,19 @@ using namespace std;
 using namespace solver;
 
 double solver:: solve (RealVariable x) {
-    double ans=0;
-    double dis = x._b*x._b-4*x._a*x._c;
+    double ans=0; 
+    double dis = (x._b*x._b)-(4*x._a*x._c);
+    if ( x._a == 0 ){
+        ans = (-1*x._c)/x._b;
+    }
+    else{
     if (dis < 0 ){
         throw runtime_error("There is no real solution");
     }
     else {
      dis = sqrt(dis);
      ans =(-1*x._b + dis)/(2*x._a);   
+    }
     }
     return ans;
 }
@@ -26,15 +31,14 @@ return 1;
 
 ///// '*' //////
 RealVariable solver::operator* (const double n , const RealVariable& x){
-     return RealVariable(x._a , x._b*n , x._c );
+     return RealVariable(x._a*n , x._b*n , x._c*n);
  }
 RealVariable solver::operator* (const RealVariable& x , const double n){
-     return RealVariable(x._a , x._b*n , x._c );
+     return RealVariable(x._a*n , x._b*n , x._c*n );
  }
 
 ///// '/' //////
  RealVariable solver::operator/ (const RealVariable& x_1 , const RealVariable& x_2){
-     // x^2/3x^2
      if (x_1._a != 0 && x_2._a != 0){
          double temp= x_1._a/ x_2._a;
         return RealVariable( 0 , x_1._b , x_1._c+temp);
@@ -44,6 +48,9 @@ RealVariable solver::operator* (const RealVariable& x , const double n){
 
  RealVariable solver::operator/ (const RealVariable& x , const double n){
     RealVariable v;
+     v._a= x._a;
+     v._b= x._b;
+     v._c= x._c;
     if (x._a != 0){
         v._a= x._a/n;
     }
@@ -57,6 +64,9 @@ RealVariable solver::operator* (const RealVariable& x , const double n){
  }
  RealVariable solver::operator/ ( const double n ,const RealVariable& x){
     RealVariable v;
+     v._a= x._a;
+     v._b= x._b;
+     v._c= x._c;
     if (x._a != 0){
         v._a= x._a/n;
     }
@@ -100,6 +110,9 @@ RealVariable solver::operator- (const RealVariable& x , const double n){
 ///// '==' //////
  RealVariable solver::operator== (const RealVariable& x_1 , const RealVariable& x_2){
      RealVariable v_1;
+     v_1._a= x_1._a;
+     v_1._b= x_1._b;
+     v_1._c= x_1._c;
      if (x_2._a != 0){
         if (x_2._a < 0){
          v_1._a =x_1._a+ x_2._a;
@@ -128,26 +141,19 @@ RealVariable solver::operator- (const RealVariable& x , const double n){
  }
  RealVariable solver::operator== (const RealVariable& x , const double n){
      RealVariable v;
-     if(n!=0){
-         if(n>0){
-             v._c= x._c -n;
-         }
-         else{
-             v._c= x._c +n;
-         }
-     }
+     v._a= x._a;
+     v._b= x._b;
+     v._c= x._c;
+     v._c= x._c + (-1*n);
+    
      return v;
  }
  RealVariable solver::operator== ( const double n ,const RealVariable& x){
       RealVariable v;
-     if(n!=0){
-         if(n>0){
-             v._c = n - x._c;
-         }
-         else{
-             v._c=n +x._c;
-         }
-     }
+      v._a= x._a;
+     v._b= x._b;
+     v._c= x._c;
+     v._c= x._c + (-1*n);
      return v;
  }
 
@@ -206,8 +212,6 @@ RealVariable solver::operator- (const RealVariable& x , const double n){
  ComplexVariable solver::operator== ( std::complex<double> n ,const ComplexVariable &y){return y;}
  ComplexVariable solver::operator== (const ComplexVariable &y , double n){return y;}
  ComplexVariable solver::operator== ( double n ,const ComplexVariable &y){return y;}
-
-
 
 
 
