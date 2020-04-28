@@ -53,15 +53,19 @@ friend RealVariable operator== ( const double n ,const RealVariable& x);
 
 class ComplexVariable{
 public:
-complex<double> _rel, _img;
+complex<double> _a;
+complex<double> _b, _c;
 
 ComplexVariable(){
-    _rel=_img=0;
+    _a=0;
+    _b=1; 
+    _c=0;
 }
 
-ComplexVariable(complex<double> rel , complex<double> img){
-    _rel=rel;
-    _img =img;
+ComplexVariable(complex<double> a,complex<double> b , complex<double> c){
+    _a=a;
+    _b=b;
+    _c =c;
 }
 
 ///// '*' //////
@@ -105,6 +109,6 @@ friend ComplexVariable operator== ( double n ,const ComplexVariable &y);
 
 };
 double solve (RealVariable x);
-double solve (ComplexVariable y);
+complex<double> solve (ComplexVariable y);
 
 }
