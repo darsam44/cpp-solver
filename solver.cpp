@@ -21,8 +21,10 @@ double solver:: solve (RealVariable x) {
      ans =(-1*x._b + dis)/(2*x._a);   
     }
     }
-    return ans;
+     double rounded = (int)(ans * 10000.0)/10000.0;
+    return rounded;
 }
+
 
 
 complex<double> solver:: solve (ComplexVariable y) {
@@ -33,7 +35,10 @@ if(y._a==complex<double> (0,0)){
 ans=(-y._c)/y._b;
 }
 else{
+
     dis=sqrt(dis);
+        cout<<dis <<"disdisdis" <<endl;
+
     ans=((complex<double> (-1)*y._b)+dis)/(complex<double> (2,0)*y._a);
 }
 return ans;
@@ -58,7 +63,7 @@ RealVariable solver::operator* (const RealVariable& x , const double n){
          v_1._a =0;
          v_1._c+= x_1._a/x_2._a;
      }
-     if (x_1._a != 0 && x_2._b != 0 ){
+     if (v_1._a != 0 && x_2._b != 0 ){
          v_1._a =0;
          v_1._b+= x_1._a/x_2._b;   
      }
@@ -91,13 +96,13 @@ RealVariable solver::operator* (const RealVariable& x , const double n){
      v._b= x._b;
      v._c= x._c;
     if (x._a != 0){
-        v._a= x._a/n;
+        v._a= n/x._a;
     }
     if (x._b != 0 ){
-        v._b= x._b/n;
+        v._b= n/x._b;
     }
     if (x._c != 0 ){
-        v._c= x._c/n;
+        v._c= n/x._c;
     }
      return v;
  }
@@ -197,7 +202,7 @@ RealVariable solver::operator- (const RealVariable& x , const double n){
          v_1._a =0;
          v_1._c+= y_1._a/y_2._a;
      }
-     if (y_1._a != std::complex<double> (0) && y_2._b != std::complex<double> (0) ){
+     if (v_1._a != std::complex<double> (0) && y_2._b != std::complex<double> (0) ){
          v_1._a =0;
          v_1._b+= y_1._a/y_2._b;   
      }
@@ -211,7 +216,7 @@ RealVariable solver::operator- (const RealVariable& x , const double n){
      return ComplexVariable(y._a/n, y._b/n,y._c/n);
  }
  ComplexVariable solver::operator/ ( std::complex<double> n ,const ComplexVariable &y){
-     return (y/n);
+     return ComplexVariable(n/y._a, n/y._b,n/y._c);
  }
  ComplexVariable solver::operator/ (const ComplexVariable &y , double n){
      return  ComplexVariable(y._a/n, y._b/n,y._c/n);
@@ -245,13 +250,13 @@ RealVariable solver::operator- (const RealVariable& x , const double n){
      return  ComplexVariable(y._a, y._b,y._c-n);
      }
  ComplexVariable solver::operator- ( std::complex<double> n ,const ComplexVariable &y){
-     return (y-n);
+     return ComplexVariable(y._a, y._b,n-y._c);
      }
  ComplexVariable solver::operator- (const ComplexVariable &y , double n){
      return  ComplexVariable(y._a, y._b,y._c-n);
      }
  ComplexVariable solver::operator- ( double n ,const ComplexVariable &y){
-     return (y-n);
+     return ComplexVariable(y._a, y._b,n-y._c);
      }
 
 ///// '^' //////
