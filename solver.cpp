@@ -76,6 +76,9 @@ RealVariable solver::operator* (const RealVariable& x , const double n){
  }
 
  RealVariable solver::operator/ (const RealVariable& x , const double n){
+    if ( n == 0 ){
+         throw runtime_error("There is no real solution");
+    }
     RealVariable v;
      v._a= x._a;
      v._b= x._b;
