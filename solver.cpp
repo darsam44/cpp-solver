@@ -9,6 +9,9 @@ using namespace solver;
 double solver:: solve (RealVariable x) {
     double ans=0; 
     double dis = (x._b*x._b)-(4*x._a*x._c);
+    if( x._a == 0 && x._b ==0  && x._c != 0){
+         throw runtime_error("There is no real solution");
+    }
     if ( x._a == 0 ){
         ans = (-1*x._c)/x._b;
     }
@@ -37,8 +40,6 @@ ans=(-y._c)/y._b;
 else{
 
     dis=sqrt(dis);
-        cout<<dis <<"disdisdis" <<endl;
-
     ans=((complex<double> (-1)*y._b)+dis)/(complex<double> (2,0)*y._a);
 }
 return ans;
