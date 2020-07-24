@@ -16,5 +16,11 @@ test: TestRunner.o Test_iris.o Test_shahar.o $(STUDENT_OBJECTS)
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
+Test: TestCounter.o Test.o $(STUDENT_OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o Test
+
+demo: Demo.o $(STUDENT_OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o demo
+
 clean:
 	rm -f *.o test
