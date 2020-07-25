@@ -3,24 +3,23 @@
 CXX=clang++-9 
 CXXFLAGS=-std=c++2a
 
-HEADERS := solver.hpp $(wildcard *.h*)
-STUDENT_SOURCES := $(filter-out $(wildcard Test*.cpp), $(wildcard *.cpp))
-STUDENT_OBJECTS := $(subst .cpp,.o,$(STUDENT_SOURCES))
+HEADERS=solver.hpp
+OBJECTS=solver.o
 
-run: test
+run: demo
 	./$^
 
-test: TestRunner.o Test_iris.o Test_shahar.o $(STUDENT_OBJECTS)
+demo: Demo.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o demo
+
+test: TestRunner.o Test_iris.o Test_shahar.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o test
+
+Test: TestCounter.o Test.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o Test
 
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
-Test: TestCounter.o Test.o $(STUDENT_OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o Test
-
-demo: Demo.o $(STUDENT_OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o demo
-
 clean:
-	rm -f *.o test
+	rm -f *.o demo test
